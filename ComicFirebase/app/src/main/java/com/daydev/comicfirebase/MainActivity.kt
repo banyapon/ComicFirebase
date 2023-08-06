@@ -3,6 +3,7 @@ package com.daydev.comicfirebase
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -17,7 +18,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var firebaseDatabase: FirebaseDatabase
     private lateinit var databaseReference: DatabaseReference
     lateinit var mAuth: FirebaseAuth
-
+    private var buttonVideo: Button? = null
+    private var buttonUpload: Button? = null
 
     override fun onStart(){
         super.onStart()
@@ -52,6 +54,19 @@ class MainActivity : AppCompatActivity() {
         dataAdapter = DataAdapter(response_data as ArrayList<DataModel>)
         recyclerView!!.adapter = dataAdapter
         bindingData()
+
+        buttonVideo = findViewById<Button>(R.id.buttonVideo)
+        buttonVideo!!.setOnClickListener {
+            var videoView = Intent(this,LiveActivity::class.java)
+            startActivity(videoView)
+        }
+        buttonUpload = findViewById<Button>(R.id.buttonUpload)
+        buttonUpload!!.setOnClickListener {
+            var uploadMedia = Intent(this,UploadActivity::class.java)
+            startActivity(uploadMedia)
+        }
+
+
     }
 
     private fun bindingData() {
